@@ -1,7 +1,7 @@
 # ENGG-Project
 Air Pollution prediction model
 
-## Git Workflow (for beginners)
+## Git Workflow
 
 We keep `main` always working. All changes happen on a separate branch, then get merged in through a Pull Request (PR).
 
