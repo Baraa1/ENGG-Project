@@ -216,3 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+#data file
+owid-energy-data.csv
+*Energy*.csv
+
+.history/
