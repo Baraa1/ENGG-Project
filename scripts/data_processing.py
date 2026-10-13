@@ -1,6 +1,10 @@
 import pandas as pd
 import kagglehub
 import os
+from pathlib import Path
+
+# Repo root (this file lives in scripts/), so the script works from any folder
+ROOT = Path(__file__).resolve().parent.parent
 
 # 1. Download data automatically via kagglehub
 path = kagglehub.dataset_download("pralabhpoudel/world-energy-consumption")
@@ -8,8 +12,8 @@ path = kagglehub.dataset_download("pralabhpoudel/world-energy-consumption")
 # The downloaded file is usually named "World Energy Consumption.csv"
 energy_file = os.path.join(path, "World Energy Consumption.csv") 
 
-# 2. Define PM2.5 file path (ensure this file is in your working directory)
-pm25_file = 'average-exposure-pm25-pollution.csv'
+# 2. Define PM2.5 file path
+pm25_file = ROOT / 'data' / 'raw' / 'average-exposure-pm25-pollution.csv'
 
 # 3. Define the cleaning and merging function
 def clean_and_merge_climate_data(energy_path, pm25_path, min_valid_years=15):
@@ -46,7 +50,7 @@ def clean_and_merge_climate_data(energy_path, pm25_path, min_valid_years=15):
     countries_to_keep = valid_years_per_country[valid_years_per_country >= min_valid_years].index
     
     final_df = clean_merged[clean_merged['country'].isin(countries_to_keep)]
-    final_df.to_csv('cleaned_climate_merged.csv', index=False)
+    final_df.to_csv(ROOT / 'data' / 'processed' / 'cleaned_climate_merged.csv', index=False)
     
     print(f"Data cleaned successfully! Retained {len(countries_to_keep)} countries/regions.")
     return final_df

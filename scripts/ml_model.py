@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -5,9 +7,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
-# 1. Load the cleaned dataset
-# Ensure 'cleaned_climate_merged.csv' is in the same directory as this script
-df = pd.read_csv('cleaned_climate_merged.csv')
+# Repo root (this file lives in scripts/), so the script works from any folder
+ROOT = Path(__file__).resolve().parent.parent
+
+# 1. Load the cleaned dataset (made by data_processing.py)
+df = pd.read_csv(ROOT / 'data' / 'processed' / 'cleaned_climate_merged.csv')
 
 # 2. Define Features (X) and Target (y)
 X = df[['% GHG emitting source', '% GHG non emitting source']]
