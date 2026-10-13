@@ -3,3 +3,5 @@ kagglehub
 scikit-learn
 matplotlib
 numpy
+openpyxl
+joblib
